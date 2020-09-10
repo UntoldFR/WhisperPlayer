@@ -27,7 +27,7 @@ public class Main extends JavaPlugin {
 					Player receiver = Bukkit.getPlayerExact(args[0]);
 					if (receiver != null) {
 						int arg = 2;
-						int totalArgs = args.length - 1;
+						int totalArgs = args.length;
 						String message = args[1];
 						while (arg < totalArgs) {
 							message = message + " " + args[arg];
