@@ -33,20 +33,30 @@ public class Main extends JavaPlugin {
 							message = message + " " + args[arg];
 							arg++;
 						}
-						receiver.sendMessage(ChatColor.LIGHT_PURPLE + "Message de " + emitter.getName() + " : " + message);
-						emitter.sendMessage(ChatColor.LIGHT_PURPLE + "Message pour " + receiver.getName() + " : " + message);
+						messagePlayer(emitter, "LIGHT_PURPLE", "/w to " + receiver.getName().toUpperCase() + " : " + message);
+						messagePlayer(receiver, "LIGHT_PURPLE", "/w from " + emitter.getName().toUpperCase() + " : " + message);
 						return true;
 					}
-					emitter.sendMessage(ChatColor.DARK_RED + "Nom de joueur invalide, ou joueur OFFLINE.");
+					messagePlayer(emitter, "RED", "Player name invalid or player OFFLINE.");
 					return false;
 				}
 				if (args.length < 2 || args[0].equals("help")) {
-					emitter.sendMessage(ChatColor.DARK_RED + "/whisper NOM MESSAGE");
+					messagePlayer(emitter, "RED", "How to use the command :");
+					messagePlayer(emitter, "RED", "/whisper [PLAYERNAME] [MESSAGE]");
 					return false;
 				}
 				return false;
 			}
 			return false;
+		}
+		return false;
+	}
+	
+	public boolean messagePlayer(Player player, String color, String message) {
+		if (player instanceof Player) {
+			ChatColor colorCode = ChatColor.valueOf(color);
+			player.sendMessage(colorCode + message);
+			return true;
 		}
 		return false;
 	}
